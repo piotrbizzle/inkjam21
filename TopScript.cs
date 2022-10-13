@@ -13,6 +13,9 @@ public class TopScript : MonoBehaviour
     private Canvas canvas = null;
 
     [SerializeField]
+    private GameObject buttonGroupPrefab;
+    
+    [SerializeField]
     private Text textPrefab = null;
 
     [SerializeField]
@@ -133,7 +136,7 @@ public class TopScript : MonoBehaviour
 
 	    // add collision
 	    if (_collides) {
-       	go.AddComponent<Rigidbody2D>();
+		go.AddComponent<Rigidbody2D>();
 		go.GetComponent<Rigidbody2D>().gravityScale = 0.0f;
 		go.GetComponent<Rigidbody2D>().constraints = RigidbodyConstraints2D.FreezeAll;
 	    } else {
@@ -908,6 +911,8 @@ public class TopScript : MonoBehaviour
 	    storyTextField.text = currentStoryText;
 	    storyTextField.transform.SetParent(canvas.transform, false);
 
+	    GameObject buttonGroup = Instantiate (this.buttonGroupPrefab) as GameObject;
+	    buttonGroup.transform.SetParent(canvas.transform, false);
 
 	    // choices
     	    lastLineHadChoices = story.currentChoices.Count != 0;
@@ -920,7 +925,7 @@ public class TopScript : MonoBehaviour
 		Choice choice = story.currentChoices [i];
 		
 		Button choiceButton = Instantiate (buttonPrefab) as Button;
-		choiceButton.transform.SetParent (canvas.transform, false);
+		choiceButton.transform.SetParent (buttonGroup.transform, false);
 
 		Text choiceText = choiceButton.GetComponentInChildren<Text> ();
 		choiceText.text = choice.text.Trim();
@@ -934,11 +939,10 @@ public class TopScript : MonoBehaviour
     }
 
     void OnClickChoiceButton (Choice choice) {
-	story.ChooseChoiceIndex (choice.index);
+	this.story.ChooseChoiceIndex (choice.index);
+	this.story.Continue();
 	storyWaiting = false;
     }
-
-
 
     void ClearCanvas() {
 	int childCount = canvas.transform.childCount;
@@ -1009,7 +1013,7 @@ public class TopScript : MonoBehaviour
 	bool horizontal = left ^ right;
 	bool diagonal = vertical && horizontal;
 	
-	float speedScale = diagonal ? 4.2f : 6.0f;
+	float speedScale = diagonal ? 6.2f : 8.0f;
 
 	if (up && playerGo.transform.position.y < ScreenTopY + ScreenEdgeBuffer) {
 	    playerGo.transform.Translate(Vector3.up * Time.deltaTime * speedScale);

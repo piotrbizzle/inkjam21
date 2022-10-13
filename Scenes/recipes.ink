@@ -49,17 +49,16 @@ VAR pepper_popper_value = 36
 == introduction ==
     - You wake up to a terrible shock! Someone has broken into your kitchen-apartment! They've stolen all of your money and your ingredients and it looks they tore up your recipe book!"
     + "Dang, what now?"
-    - As the Royal Chef, maybe you can talk to your employer/landlord, King Cake. He likes to hang out in the next room over. But before you go, you gotta learn the controls!
+    - As the Royal Chef, maybe you can talk to your employer/landlord, Cake King. He likes to hang out in the next room over. But before you go, you gotta learn the controls!
     + "The controls???"
     - Yeah! Use WASD to move and press SPACE to talk to people or read pages and signs. SPACE also lets you cook at your oven over there to the West! You can pick up some items with E and drop them with Q.
     + "Sounds intuitive!"
-    - Kind of! Good luck talking to King Cake! I'm sure he'll understand...
-    + "Awesome, this is gonna be fine"
+    - Kind of! Good luck talking to Cake King! I'm sure he'll understand...
     -> continue_to_holding
 
 // npcs
 == king_cake ==
-    - {rent_remaining <= 0: You've paid off your rent and even fed me an additional ${-1 * rent_remaining} of food. Congratulations my boy! Now I must reveal my terrible secret! | {king_cake_intro: "Tenant! I must insist you pay your remaining ${rent_remaining} rent or feed me items of equivalent value!" | You approach the domineering King Cake}}
+    - {rent_remaining <= 0: You've paid off your rent and even fed me an additional ${-1 * rent_remaining} of food. Congratulations my boy! Now I must reveal my terrible secret! | {king_cake_intro: "Tenant! I must insist you pay your remaining ${rent_remaining} rent or feed me items of equivalent value!" | You approach the domineering Cake King}}
     + {!king_cake_intro} "My Liege!"
         -> king_cake_intro
     + {rent_remaining <= 0} "Secret..?"
@@ -183,7 +182,7 @@ VAR pepper_popper_value = 36
     -> continue_to_holding
     
     + {king_cake_intro} "I take my leave, Your majesty!"
-       King Cake nods curtly
+       Cake King nods curtly
         -> continue_to_holding
     
 == king_cake_intro ==
@@ -246,7 +245,7 @@ VAR pepper_popper_value = 36
 == crossroads_sign ==
     - North: Mingus Farms Creamery
     - East: Big Looping Desert
-    - South: King Cake's Cool Castle
+    - South: Cake King's Cool Castle
     - West: Underpopulated Broccoli Forest
     -> continue_to_holding
 
